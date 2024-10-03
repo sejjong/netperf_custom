@@ -35,6 +35,8 @@ char	nettest_id[]="\
 /*	rem_cpu_rate()		find the remote cpu maxrate	*/
 /*								*/
 /****************************************************************/
+#define CUSTOM_SOCK_STREAM 7
+
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -869,14 +871,27 @@ complete_addrinfos(struct addrinfo **remote,struct addrinfo **local, char remote
     remote_data_family = control_family;
   }
 
-  *remote = complete_addrinfo(remote_host,
+  if (type == CUSTOM_SOCKET_TYPE)
+  {
+    *remote = complete_addrinfo(remote_host,
+              remote_data_address,
+              remote_data_port,
+              remote_data_family,
+              SOCK_STREAM,
+              protocol,
+              flags);    
+
+  }
+  else 
+  {
+    *remote = complete_addrinfo(remote_host,
 			      remote_data_address,
 			      remote_data_port,
 			      remote_data_family,
 			      type,
 			      protocol,
 			      flags);
-
+  }
   /* OK, if the user has not specified a local data endpoint address
      (test-specific -L), pick the local data endpoint address based on
      the remote data family info (test-specific -H or -4 or -6

@@ -1,49 +1,31 @@
+#netperf custom
 
-BE SURE TO READ THE MANUAL. EVEN THOUGH IT MAY BE OUTDATED.
+다운받고 ./configure 실행
 
-This is a brief readme file for the netperf TCP/UDP/sockets/etc
-performance benchmark. This is here mostly as a boot-strap. The real
-information is in the manual, which can be found in netperf.ps and
-online from http://www.netperf.org/netperf/NetperfPage.html. The
-sources, and a limited number of binaries, can be found from
-ftp://ftp.cup.hp.com/dist/networking/benchmarks/netperf/ .
+-> configure: error: cannot guess build type; you must specify one
 
-BE SURE TO READ THE MANUAL. EVEN THOUGH IT MAY BE OUTDATED.
+최신버전 다운
+wget https://git.savannah.gnu.org/cgit/config.git/plain/config.guess -O config.guess
+wget https://git.savannah.gnu.org/cgit/config.git/plain/config.sub -O config.sub
 
-There is a COPYRIGHT file included.  It is called COPYING because that
-is what autosomethingorother wanted. It is based on what the HP Legal
-Eagles gave me. I am not sure if the legalese is clear, but the intent
-is to say "Here is a benchmark. Use it in good health. Pass it along,
-port it, enhance it. You didn't pay for this tool, so don't expect it
-to be perfect ;-)" The rest of it is there to keep the layers happy...  
+이후 ./configure
 
-While the copyright is pretty much in spirit an "open source" one, it
-is not in letter - I never took the time to try to get it approved.
-If you feel strongly about the license of the code you use and want
-something under the GPL, consider netperf4:
+make
 
-http://www.netperf.org/svn/netperf4/trunk
 
-Feel free to report netperf results in public forums, but please be
-excruciatingly complete in your description of the test envorinment.
-The old netperf database at:
+/usr/bin/ld: nettest_omni.o:(.bss+0x1e8): multiple definition of `loc_nodelay'; nettest_bsd.o:(.bss+0x20): first defined here
+/usr/bin/ld: nettest_omni.o:(.bss+0x1ec): multiple definition of `rem_nodelay'; nettest_bsd.o:(.bss+0x24): first defined here
+/usr/bin/ld: nettest_omni.o:(.bss+0x1f0): multiple definition of `loc_sndavoid'; nettest_bsd.o:(.bss+0x30): first defined here
+/usr/bin/ld: nettest_omni.o:(.bss+0x1f4): multiple definition of `loc_rcvavoid'; nettest_bsd.o:(.bss+0x34): first defined here
+/usr/bin/ld: nettest_omni.o:(.bss+0x1f8): multiple definition of `rem_sndavoid'; nettest_bsd.o:(.bss+0x38): first defined here
+/usr/bin/ld: nettest_omni.o:(.bss+0x1fc): multiple definition of `rem_rcvavoid'; nettest_bsd.o:(.bss+0x3c): first defined here
 
-  http://www.netperf.org/netperf/NetperfPage.html
+loc_nodelay
+rem_nodelay
+loc_sndavoid
+loc_rcvavoid
+rem_sndavoid
+rem_rcvavoid
+이 변수들을 nettest_bsd.c 와 nettest_omni.c 중복으로 정의되고있음
+nettest_omni.c 에 있는 변수들을 모두 지우고 netlib.h 에 extern int 로 추가해주었음
 
-is no more - or rather the utilities for accessing it no longer run.
-The data is still present in the tree, albeit _VERY_ old now.
-
-There is an Internet mailing list devoted to netperf. It is called
-netperf-talk and it is hosted on netperf.org. Subscription requests
-should go to netperf-talk-request@netperf.org.
-
-Please DO NOT SEND subscription requests to netperf-talk!
-
-If you run into severe difficulties, or are just feeling chatty,
-please feel free to drop some email to me - Rick Jones
-<rick.jones2@hp.com>. Be sure to include a meaningful subject lines.
-
-happy benchmarking, 
-rick jones
-
-BE SURE TO READ THE MANUAL. EVEN THOUGH IT MAY BE OUTDATED.

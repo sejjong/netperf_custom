@@ -29,3 +29,17 @@ rem_rcvavoid
 이 변수들을 nettest_bsd.c 와 nettest_omni.c 중복으로 정의되고있음
 nettest_omni.c 에 있는 변수들을 모두 지우고 netlib.h 에 extern int 로 추가해주었음
 
+이후 make 하면 netperf 실행파일이 만들어짐
+
+netperf custom
+
+netperf.c 파일에
+입력이 CUSTOM_SOCK_STREAM 이 올 경우 send_custom_tcp_stream 이 호출되도록 추가
+
+nettest_bsd.c 에 send_custom_tcp_stream 함수추가
+nettest_bsd.h 에 함수 헤더 추가
+
+->
+/usr/bin/ld: netperf.o: in function `main':
+netperf.c:(.text+0x1cc): undefined reference to `send_custom_tcp_stream'
+collect2: error: ld returned 1 exit status

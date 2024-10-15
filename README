@@ -5,6 +5,8 @@
 -> configure: error: cannot guess build type; you must specify one
 
 최신버전 다운
+install make
+
 wget https://git.savannah.gnu.org/cgit/config.git/plain/config.guess -O config.guess
 wget https://git.savannah.gnu.org/cgit/config.git/plain/config.sub -O config.sub
 

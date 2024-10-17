@@ -1,11 +1,8 @@
 #netperf custom
 
-다운받고 ./configure 실행
-
--> configure: error: cannot guess build type; you must specify one
-
 최신버전 다운
-install make
+apt-get install make git wget build-essential autoconf libtool gcc-9 g++-9 -y
+git clone https://github.com/sejjong/netperf_custom2.git
 
 wget https://git.savannah.gnu.org/cgit/config.git/plain/config.guess -O config.guess
 wget https://git.savannah.gnu.org/cgit/config.git/plain/config.sub -O config.sub

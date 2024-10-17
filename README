@@ -10,7 +10,7 @@ git clone https://github.com/sejjong/netperf_custom2.git
 wget https://git.savannah.gnu.org/cgit/config.git/plain/config.guess -O config.guess
 wget https://git.savannah.gnu.org/cgit/config.git/plain/config.sub -O config.sub
 
-이후 ./configure
+./configure
 
 make
 

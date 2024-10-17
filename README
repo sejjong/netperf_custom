@@ -1,4 +1,7 @@
 #netperf custom
+apt-get remove netperf -y
+apt-get purge netperf -y
+apt-get autoremove -y
 
 최신버전 다운
 apt-get install make git wget build-essential autoconf libtool gcc-9 g++-9 -y
